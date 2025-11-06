@@ -129,10 +129,22 @@
 		</model-viewer>
 
 		<script>
+			const isMobileAR = /Android|iPhone|iPad/i.test(navigator.userAgent);
+			const modelViewer = document.getElementById("arCard");
+			const mindARScene = document.querySelector("a-scene");
+
+			if (isMobileAR) {
+				// Show model-viewer, hide MindAR
+				modelViewer.style.display = "block";
+				mindARScene.style.display = "none";
+			} else {
+				// Show MindAR, hide model-viewer
+				modelViewer.style.display = "none";
+				mindARScene.style.display = "block";
+			}
 			const socialContainer = document.getElementById("socialContainer");
 
 			// Show social icons after model loads
-			const modelViewer = document.getElementById("arCard");
 			modelViewer.addEventListener("load", () => {
 				socialContainer.classList.add("show");
 			});
